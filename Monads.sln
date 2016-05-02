@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monads", "Monads\Monads.csproj", "{C29EB378-5245-49FD-A07F-DE61C91D5C0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monads.Test.Unit", "Monads.Test.Unit\Monads.Test.Unit.csproj", "{A6EC1CDB-01DE-4F6F-BEE7-3CF9538C6A96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C29EB378-5245-49FD-A07F-DE61C91D5C0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C29EB378-5245-49FD-A07F-DE61C91D5C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C29EB378-5245-49FD-A07F-DE61C91D5C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C29EB378-5245-49FD-A07F-DE61C91D5C0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6EC1CDB-01DE-4F6F-BEE7-3CF9538C6A96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6EC1CDB-01DE-4F6F-BEE7-3CF9538C6A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6EC1CDB-01DE-4F6F-BEE7-3CF9538C6A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6EC1CDB-01DE-4F6F-BEE7-3CF9538C6A96}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
