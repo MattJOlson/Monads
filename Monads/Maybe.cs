@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 
 namespace Monads
 {
@@ -35,6 +36,11 @@ namespace Monads
                 return Maybe.Return(func(_value));
 
             return Maybe<Tres>.Nil;
+        }
+
+        public Maybe<Tres> Then<Tres>(Func<T, Tres> func)
+        {
+            return Lift(func);
         }
     }
 
