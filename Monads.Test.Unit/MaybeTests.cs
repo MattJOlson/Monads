@@ -58,5 +58,21 @@ namespace Monads.Test.Unit
 
             Maybe.Bind(lambda)(Maybe.Return(true)).Should().Be(Maybe.Return(42));
         }
+
+        [Test]
+        public void when_a_lifted_function_is_passed_Nil_it_returns_Nil()
+        {
+            var foo = Maybe<int>.Nil;
+
+            foo.Lift(i => i + 1).Should().Be(Maybe<int>.Nil);
+        }
+
+        [Test]
+        public void when_a_lifted_function_is_passed_just_x_it_returns_just_f_of_x()
+        {
+            var foo = Maybe.Return(42);
+
+            foo.Lift(i => i + 1).Should().Be(Maybe.Return(43));
+        }
     }
 }

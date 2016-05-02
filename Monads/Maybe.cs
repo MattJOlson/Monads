@@ -28,6 +28,14 @@ namespace Monads
 
             return nothing();
         }
+
+        public Maybe<Tres> Lift<Tres>(Func<T, Tres> func)
+        {
+            if (_hasValue)
+                return Maybe.Return(func(_value));
+
+            return Maybe<Tres>.Nil;
+        }
     }
 
     public class MaybeNothing<Tm, Tres>
