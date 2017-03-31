@@ -74,5 +74,99 @@ namespace Monads.Test.Unit
 
             foo.Lift(i => i + 1).Should().Be(Maybe.Return(43));
         }
+
+        [Test]
+        public void dont_filter_Just_when_true()
+        {
+            var foo = Maybe.Return(42);
+
+            foo.Filter(x => x % 2 == 0).Should().Be(Maybe.Return(42));
+        }
+
+        [Test]
+        public void filter_Just_to_Nil_when_false()
+        {
+            var foo = Maybe.Return(42);
+
+            foo.Filter(x => x % 2 == 1).Should().Be(Maybe<int>.Nil);
+        }
+
+        [Test]
+        public void filter_idempotent_with_Nil()
+        {
+            var foo = Maybe<int>.Nil;
+
+            foo.Filter(x => true).Should().Be(Maybe<int>.Nil);
+        }
+
+        [Test]
+        public void use_linq_to_map_Just()
+        {
+            var foo = Maybe.Return(42);
+
+            var res = from x in foo select x + 1;
+
+            res.Should().Be(Maybe.Return(43));
+        }
+
+        [Test]
+        public void use_linq_to_map_Nil()
+        {
+            var foo = Maybe<int>.Nil;
+
+            var res = from x in foo select x + 1;
+
+            res.Should().Be(Maybe<int>.Nil);
+        }
+
+        [Test]
+        public void use_linq_for_filter_dont_filter_Just_when_true()
+        {
+            var foo = Maybe.Return(42);
+
+            var res = from x in foo where x % 2 == 0 select x;
+
+            res.Should().Be(Maybe.Return(42));
+        }
+
+        [Test]
+        public void use_linq_for_filter_to_Nil_when_false()
+        {
+            var foo = Maybe.Return(42);
+
+            var res = from x in foo where x % 2 == 1 select x;
+
+            res.Should().Be(Maybe<int>.Nil);
+        }
+
+        [Test]
+        public void use_linq_for_filter_idempotent_with_Nil()
+        {
+            var foo = Maybe<int>.Nil;
+
+            var res = from x in foo where true select x;
+
+            res.Should().Be(Maybe<int>.Nil);
+        }
+
+        [Test]
+        public void use_linq_to_flatmap()
+        {
+            var foo = Maybe.Return(Maybe.Return(42));
+
+            var res = from x in foo from y in x select y + 1;
+
+            res.Should().Be(Maybe.Return(43));
+        }
+
+        [Test]
+        public void use_linq_to_flatmap_nested_nil()
+        {
+            var foo = Maybe.Return(Maybe<int>.Nil);
+
+            var res = from x in foo from y in x select y + 1;
+
+            res.Should().Be(Maybe<int>.Nil);
+        }
     }
 }
