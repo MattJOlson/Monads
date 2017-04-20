@@ -42,6 +42,11 @@ namespace Monads
         {
             return Lift(func);
         }
+
+        public Maybe<T> Filter(Func<T,Boolean> func)
+        {
+            return _hasValue ? (func(_value) ? this : Nil) : Nil;
+        }
     }
 
     public class MaybeNothing<Tm, Tres>
@@ -71,6 +76,26 @@ namespace Monads
         public static Func<Maybe<Tsrc>, Maybe<Tres>> Bind<Tsrc, Tres>(Func<Tsrc, Maybe<Tres>> f)
         {
             return m => m.Nothing(() => Maybe<Tres>.Nil).Just(f);
+        }
+
+        public static Maybe<Tres> Bind<Tsrc,Tres>(this Maybe<Tsrc> x, Func<Tsrc, Maybe<Tres>> f)
+        {
+            return Bind(f)(x);
+        }
+
+        public static Maybe<Tres> Select<Tsrc,Tres>(this Maybe<Tsrc> x, Func<Tsrc,Tres> f)
+        {
+            return x.Lift(f);
+        }
+
+        public static Maybe<T> Where<T>(this Maybe<T> x, Func<T,Boolean> p)
+        {
+            return x.Filter(p);
+        }
+
+        public static Maybe<Tres> SelectMany<Tsrc,Tint,Tres>(this Maybe<Tsrc> x, Func<Tsrc, Maybe<Tint>> f, Func<Tsrc,Tint,Tres> g)
+        {
+            return x.Bind(outer => f(outer).Bind(inner => Return(g(outer,inner))));
         }
     }
 }
